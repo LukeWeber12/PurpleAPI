@@ -36,12 +36,11 @@ app.post('/Suggest', function (req, res) {
 app.put("/Update/:Id", function(req, res){
    console.log(req.params)
    console.log(JSON.stringify(req.body))
-   connection.query("Update Suggestions Set Suggestion = ? Where Id = ?",req.body.Suggestion,req.params.Id , function (err, result) {
+   connection.query("Update Suggestions Set Suggestion = ? Where Id = ?",[req.body.Suggestion,req.params.Id] , function (err, result) {
       if (err) {
          res.status(500).send();
          console.log(err);
       };
-      console.log("Result: " + result);
     });
    res.status(200);
    res.send();
@@ -55,7 +54,6 @@ app.delete("/Delete/:Id", function(req, res){
          res.status(500).send();
          console.log(err);
       };
-      console.log("Result: " + result);
     });
    res.status(200);
    res.json(req.body);
